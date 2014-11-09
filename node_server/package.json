@@ -1,0 +1,19 @@
+{
+  "name"         : "node-bath-rugby",
+  "version"      : "0.0.0",
+  "description"  : "Server for bath rugby requests.",
+  "main"         : "server.js",
+  "author"       : "Scotch",
+  "dependencies" : {
+    "express.io"      : "*",
+    "mongoose"        : "*",
+    "morgan"          : "*",
+    "body-parser"     : "*",
+    "method-override" : "*",
+    "http"            : "*",
+    "feedparser"      : "*" ,
+    "twitter"         : "*",
+    "cors"            : "*"
+  }
+}
+
