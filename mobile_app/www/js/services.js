@@ -64,6 +64,17 @@ angular.module('com.htmlxprs.socialAuth.services', [])
             }
         }
     })
+    .factory('ManOfTheMatchService', function($http) {
+        return {
+            vote: function(player, callback) {
+                $http.get(httpUrl + 'vote/' + player);
+                $http.get(httpUrl + 'votePercentages')
+                    .success(function(data) {
+                        callback(data)
+                    });
+            }
+        }
+    })
     .factory('socket', function($rootScope) {
         var socket = io.connect(httpUrl);
         return {

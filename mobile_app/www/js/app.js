@@ -79,4 +79,13 @@ angular.module('socialAuth', ['ionic', 'firebase', 'ngCordova', 'com.htmlxprs.so
                 }
             }
         })
+        .state('tab.mom', {
+            url: '/mom',
+            views: {
+                'mom-tab': {
+                    templateUrl: 'views/mom.html',
+                    controller: 'ManOfTheMatchController'
+                }
+            }
+        })
 }]);

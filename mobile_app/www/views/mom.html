@@ -1,0 +1,10 @@
+<!--
+This template loads for the 'tab.about' state (app.js)
+-->
+<ion-view title="Man of the match">
+   <ion-content padding="true">
+   <img ng-repeat="player in players" ng-src="img/players/{{player}}" ng-click="VoteFor(player)"/>   
+   {{percentages}}
+   </ion-content>
+</ion-view>
+
