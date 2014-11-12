@@ -13,7 +13,9 @@
     "http"            : "*",
     "feedparser"      : "*" ,
     "twitter"         : "*",
-    "cors"            : "*"
+    "cors"            : "*",
+    "request"         : "*",
+    "cheerio"         : "*"
   }
 }
 
