@@ -15,7 +15,9 @@
     "twitter"         : "*",
     "cors"            : "*",
     "request"         : "*",
-    "cheerio"         : "*"
+    "cheerio"         : "*",
+    "lwip"            : "*",
+    "png-js"          : "*"
   }
 }
 
