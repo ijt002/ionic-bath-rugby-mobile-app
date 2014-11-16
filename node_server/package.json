@@ -17,7 +17,8 @@
     "request"         : "*",
     "cheerio"         : "*",
     "lwip"            : "*",
-    "png-js"          : "*"
+    "png-js"          : "*",
+    "node-gcm"        : "*"
   }
 }
 

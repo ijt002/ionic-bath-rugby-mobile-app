@@ -1,4 +1,5 @@
 var Todo = require('./models/todo');
+var Sender = require('../registration/sender');
 var ObjectId = require('mongoose').Schema.ObjectId;
 
 module.exports = function(app) {
@@ -47,7 +48,7 @@ module.exports = function(app) {
    // delete a todo
    app.delete('/api/todos/:todo_id', function(req, res) {
       Todo.findOne({_id: req.params.todo_id}, function(err, todo) {
-         req.io.broadcast('orderDone', todo.owner);
+         Sender("Beer Ready", todo.owner);
       });
       Todo.remove({
          _id : req.params.todo_id
