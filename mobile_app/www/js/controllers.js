@@ -51,6 +51,29 @@ angular.module('com.htmlxprs.socialAuth.controllers', [])
     }])
     .controller('RssDetailController', ['$scope', '$stateParams', '$cordovaLocalNotification', 'RssService', function($scope, $stateParams, $cordovaLocalNotification, RssService) {
         handleNotification($scope, $cordovaLocalNotification);
+
+        var clientIDs = {
+            "PayPalEnvironmentProduction": "YOUR_PRODUCTION_CLIENT_ID",
+            "PayPalEnvironmentSandbox": "AQuk6BDCjPbawRIIofzySFV6YW1sD5BVzBspFE6qB9fSqDycY8-ITl13Hwfb"
+        };
+        var config = new PayPalConfiguration({
+            merchantName: "My test shop",
+            merchantPrivacyPolicyURL: "https://mytestshop.com/policy",
+            merchantUserAgreementURL: "https://mytestshop.com/agreement"
+        });
+        var onPayPalMobileInit = function() {
+            PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", config, function() {
+                $scope.buyNow = function() {
+                    var paymentDetails = new PayPalPaymentDetails("50.00", "0.00", "0.00");
+                    var payment = new PayPalPayment("50.00", "GBP", "Awesome Sauce", "Sale", paymentDetails);
+                    PayPalMobile.renderSinglePaymentUI(payment);
+                }
+            });
+        }
+        if (window.PayPalMobile !== undefined) {
+            PayPalMobile.init(clientIDs, onPayPalMobileInit);
+        }
+
         RssService.get($stateParams.rssId, $scope);
     }])
     .controller('TwitterCtrl', ['$scope', '$cordovaLocalNotification', 'TwitterService', function($scope, $cordovaLocalNotification, TwitterService) {
