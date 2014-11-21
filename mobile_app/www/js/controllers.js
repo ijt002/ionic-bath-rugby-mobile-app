@@ -51,29 +51,6 @@ angular.module('com.htmlxprs.socialAuth.controllers', [])
     }])
     .controller('RssDetailController', ['$scope', '$stateParams', '$cordovaLocalNotification', 'RssService', function($scope, $stateParams, $cordovaLocalNotification, RssService) {
         handleNotification($scope, $cordovaLocalNotification);
-
-        var clientIDs = {
-            "PayPalEnvironmentProduction": "YOUR_PRODUCTION_CLIENT_ID",
-            "PayPalEnvironmentSandbox": "AQuk6BDCjPbawRIIofzySFV6YW1sD5BVzBspFE6qB9fSqDycY8-ITl13Hwfb"
-        };
-        var config = new PayPalConfiguration({
-            merchantName: "My test shop",
-            merchantPrivacyPolicyURL: "https://mytestshop.com/policy",
-            merchantUserAgreementURL: "https://mytestshop.com/agreement"
-        });
-        var onPayPalMobileInit = function() {
-            PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", config, function() {
-                $scope.buyNow = function() {
-                    var paymentDetails = new PayPalPaymentDetails("50.00", "0.00", "0.00");
-                    var payment = new PayPalPayment("50.00", "GBP", "Awesome Sauce", "Sale", paymentDetails);
-                    PayPalMobile.renderSinglePaymentUI(payment);
-                }
-            });
-        }
-        if (window.PayPalMobile !== undefined) {
-            PayPalMobile.init(clientIDs, onPayPalMobileInit);
-        }
-
         RssService.get($stateParams.rssId, $scope);
     }])
     .controller('TwitterCtrl', ['$scope', '$cordovaLocalNotification', 'TwitterService', function($scope, $cordovaLocalNotification, TwitterService) {
@@ -99,4 +76,40 @@ angular.module('com.htmlxprs.socialAuth.controllers', [])
                 $scope.percentages = data;
             });
         };
-    }]);
+    }])
+    .controller('ShopIndexController', ['$scope', 'ShopService', '$cordovaLocalNotification', function($scope, ShopService, $cordovaLocalNotification) {
+        handleNotification($scope, $cordovaLocalNotification);
+        ShopService.allProducts(function(products) {
+            $scope.products = products;
+        });
+    }])
+    .controller('ShopDetailController', ['$scope', '$stateParams', 'ShopService', '$cordovaLocalNotification', function($scope, $stateParams, ShopService, $cordovaLocalNotification) {
+        handleNotification($scope, $cordovaLocalNotification);
+
+         ShopService.product($stateParams.shopId, function(product) {
+            $scope.product = product;
+         });
+        var clientIDs = {
+            "PayPalEnvironmentProduction": "YOUR_PRODUCTION_CLIENT_ID",
+            "PayPalEnvironmentSandbox": "AQuk6BDCjPbawRIIofzySFV6YW1sD5BVzBspFE6qB9fSqDycY8-ITl13Hwfb"
+        };
+        var config = new PayPalConfiguration({
+            merchantName: "My test shop",
+            merchantPrivacyPolicyURL: "https://mytestshop.com/policy",
+            merchantUserAgreementURL: "https://mytestshop.com/agreement"
+        });
+        var onPayPalMobileInit = function() {
+            PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", config, function() {
+                $scope.buyNow = function() {
+                   var price = $scope.product.price;
+                    var paymentDetails = new PayPalPaymentDetails(price, "0.00", "0.00");
+                    var payment = new PayPalPayment(price, "GBP", $scope.product.title, "Sale", paymentDetails);
+                    PayPalMobile.renderSinglePaymentUI(payment);
+                }
+            });
+        }
+        if (window.PayPalMobile !== undefined) {
+            PayPalMobile.init(clientIDs, onPayPalMobileInit);
+        }
+
+    }])

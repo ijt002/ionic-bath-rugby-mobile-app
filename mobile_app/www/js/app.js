@@ -88,4 +88,22 @@ angular.module('socialAuth', ['ionic', 'firebase', 'ngCordova', 'com.htmlxprs.so
                 }
             }
         })
+        .state('tab.shop-index-tab', {
+            url: '/shop',
+            views: {
+                'shop-tab': {
+                    templateUrl: 'views/shop-index.html',
+                    controller: 'ShopIndexController'
+                }
+            }
+        })
+        .state('tab.shop-detail', {
+            url: '/shop/:shopId',
+            views: {
+                'shop-tab': {
+                    templateUrl: 'views/shop-detail.html',
+                    controller: 'ShopDetailController'
+                }
+            }
+        });
 }]);
