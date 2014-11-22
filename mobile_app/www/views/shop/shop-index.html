@@ -10,7 +10,7 @@
 
       <ion-item ng-repeat="product in products" type="item-text-wrap" href="#/tab/shop/{{product.id}}" class="wrap">
         <h2>{{product.title}}</h2>
-        <img ng-src="{{product.picture}}"/>
+        <img ng-src="{{product.picture}}" class="fit-view"/>
         <h3>£ {{product.price}}</h3>
       </ion-item>
       

@@ -12,10 +12,11 @@
     <p>
       {{product.description}}
     </p>
-    <img ng-src="{{product.picture}}"/>
+    <img ng-src="{{product.picture}}" class="fit-view"/>
     <h3>£ {{product.price}}</h3>
     
     <button ng-click="buyNow()"> Buy Now !</button>
+    <p></p>
     <p><a class="button button-small icon ion-arrow-left-b" href="#/tab/shop">Back To Shop</a></p>
   </ion-content>
 </ion-view>
